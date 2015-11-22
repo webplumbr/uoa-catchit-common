@@ -37,7 +37,7 @@ RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 381BA480 \
     && dpkg -i shiny-server.deb \
     && rm -f shiny-server.deb \
     && apt-get clean \
-    && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
+    && rm -rf /srv/shiny-server/* /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # expose ports
 EXPOSE 3838
