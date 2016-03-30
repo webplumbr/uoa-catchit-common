@@ -17,7 +17,9 @@ MAINTAINER "Science IS Team" ws@sit.auckland.ac.nz
 # install shiny server and clean up all downloaded files to make sure the image remains lean as much as possible
 # NOTE: we group a lot of commands together to reduce the number of layers that Docker creates in building this image
 
-RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 381BA480 \
+COPY key.txt /tmp/
+
+RUN apt-key add /tmp/key.txt \
     && echo "deb http://cran.stat.auckland.ac.nz/bin/linux/debian jessie-cran3/" | tee -a /etc/apt/sources.list.d/R.list \
     && apt-get update \
     && apt-get install -y -q \
@@ -28,7 +30,7 @@ RUN apt-key adv --keyserver keyserver.ubuntu.com --recv-keys 381BA480 \
         libssl1.0.0 \
         sudo \
         wget \
-    && wget --no-verbose -O libssl.deb http://ftp.us.debian.org/debian/pool/main/o/openssl/libssl0.9.8_0.9.8o-4squeeze14_amd64.deb \
+    && wget --no-verbose -O libssl.deb http://ftp.us.debian.org/debian/pool/main/o/openssl/libssl1.0.2_1.0.2g-1_amd64.deb \
     && dpkg -i libssl.deb \
     && rm -f libssl.deb \
     && R -e "install.packages(c('rmarkdown', 'devtools', 'shiny', 'RColorBrewer', 'prettyR', 'gplots'), repos='http://cran.rstudio.com/', lib='/usr/lib/R/site-library', dependencies=T)" \
