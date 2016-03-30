@@ -30,7 +30,7 @@ RUN apt-key add /tmp/key.txt \
         libssl1.0.0 \
         sudo \
         wget \
-    && wget --no-verbose -O libssl.deb http://ftp.us.debian.org/debian/pool/main/o/openssl/libssl1.0.2_1.0.2g-1_amd64.deb \
+    && wget --no-verbose -O libssl.deb http://security.ubuntu.com/ubuntu/pool/universe/o/openssl098/libssl0.9.8_0.9.8o-7ubuntu3.2_amd64.deb \
     && dpkg -i libssl.deb \
     && rm -f libssl.deb \
     && R -e "install.packages(c('rmarkdown', 'devtools', 'shiny', 'RColorBrewer', 'prettyR', 'gplots'), repos='http://cran.rstudio.com/', lib='/usr/lib/R/site-library', dependencies=T)" \
